@@ -1,7 +1,7 @@
 version: '2'
 services:
   postgres:
-    image: 9.5.4
+    image: postgres:9.5.4
   rails:
     build:
       context: .
