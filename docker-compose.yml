@@ -1,0 +1,11 @@
+version: '2'
+services:
+  postgres:
+    image: 9.5.4
+  rails:
+    build:
+      context: .
+    volumes:
+      - .:/home/riderank/riderank
+    ports:
+      - 3000:3000
