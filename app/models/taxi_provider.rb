@@ -1,0 +1,2 @@
+class TaxiProvider < ApplicationRecord
+end
