@@ -1,0 +1,2 @@
+class TaxiRide < ApplicationRecord
+end
