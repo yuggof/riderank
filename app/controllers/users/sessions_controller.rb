@@ -31,5 +31,9 @@ module Users
     def after_sign_in_path_for(resource)
       taxi_rides_path
     end
+
+    def after_sign_out_path_for(resource)
+      new_user_session_path
+    end
   end
 end
