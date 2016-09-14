@@ -5,6 +5,8 @@ class TaxiRidesController < ApplicationController
   end
 
   def new
+    @taxi_ride = TaxiRide.new
+    @taxi_providers = TaxiProvider.all
   end
 
   def create
@@ -13,6 +15,8 @@ class TaxiRidesController < ApplicationController
     if @taxi_ride.save
       redirect_to action: :index
     else
+      @taxi_providers = TaxiProvider.all
+
       render :new
     end
   end

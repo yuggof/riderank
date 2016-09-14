@@ -1,0 +1,21 @@
+<%= simple_form_for @taxi_ride do |f| %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <%= f.input :start_address %>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <%= f.input :destination_address %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <%= f.input :fare %>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <%= f.input :taxi_provider_id, collection: @taxi_providers %>
+    </div>
+  </div>
+
+  <%= f.submit 'Register', class: 'btn btn-primary' %>
+<% end %>
