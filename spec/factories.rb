@@ -10,4 +10,9 @@ FactoryGirl.define do
     taxi_provider { create(:taxi_provider) }
     distance { 1 + rand(10) }
   end
+
+  factory :user do
+    sequence(:email) { |n| "user#{n}@mail.com" }
+    password 'password123'
+  end
 end
