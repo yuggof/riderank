@@ -20,7 +20,7 @@ RSpec.describe TaxiRidesController do
         get :index
 
         expect(response).to have_http_status 302
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe TaxiRidesController do
         get :new
 
         expect(response).to have_http_status 302
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -57,15 +57,17 @@ RSpec.describe TaxiRidesController do
           tp = FactoryGirl.create(:taxi_provider)
 
           sign_in u
-          post :create, taxi_ride: {
-            start_address: 'Słomińskiego 1, Warszawa, Polska',
-            destination_address: 'Wiatraczna 1, Warszawa, Polska',
-            fare: '14.59',
-            taxi_provider_id: tp.id
+          process :create, method: :post, params: {
+            taxi_ride: {
+              start_address: 'Słomińskiego 1, Warszawa, Polska',
+              destination_address: 'Wiatraczna 1, Warszawa, Polska',
+              fare: '14.59',
+              taxi_provider_id: tp.id
+            }
           }
 
           expect(response).to have_http_status 302
-          expect(response).to redirect_to(taxi_rides_path)
+          expect(response).to redirect_to taxi_rides_path
           expect(TaxiRide.count).to eql 1
         end
       end
@@ -75,7 +77,7 @@ RSpec.describe TaxiRidesController do
           u = FactoryGirl.create(:user)
 
           sign_in u
-          post :create
+          process :create, method: :post
 
           expect(response).to have_http_status 200
           expect(TaxiRide.count).to eql 0
@@ -85,10 +87,10 @@ RSpec.describe TaxiRidesController do
 
     context 'when unauthenticated' do
       it 'redirects to sign in page' do
-        post :create
+        process :create, method: :post
 
         expect(response).to have_http_status 302
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
