@@ -29,11 +29,23 @@ RSpec.describe TaxiRidesController do
     render_views
 
     context 'when authenticated' do
-      it 'renders view'
+      it 'renders view' do
+        u = FactoryGirl.create(:user)
+
+        sign_in u
+        get :new
+
+        expect(response).to have_http_status 200
+      end
     end
 
     context 'when unauthenticated' do
-      it 'redirects to sign in page'
+      it 'redirects to sign in page' do
+        get :new
+
+        expect(response).to have_http_status 302
+        expect(response).to redirect_to(new_user_session_path)
+      end
     end
   end
 
