@@ -4,6 +4,8 @@
       <h2>Log in</h2>
     </div>
     <div class="panel-body">
+      <%= render 'shared/flash' %>
+
       <%= simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
         <%= f.input :email %>
         <%= f.input :password %>
