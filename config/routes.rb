@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :taxi_rides, only: %i[index new]
+  resources :taxi_rides, only: %i[index new create]
 end
