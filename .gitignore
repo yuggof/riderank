@@ -22,3 +22,6 @@
 
 # Ignore vim swp files.
 *.swp
+
+# Ignore .env file.
+.env
