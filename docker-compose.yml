@@ -5,6 +5,8 @@ services:
   rails:
     build:
       context: .
+    environment:
+      - GOOGLE_MAPS_DISTANCE_MATRIX_API_KEY
     volumes:
       - .:/home/riderank/riderank
     ports:
