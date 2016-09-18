@@ -1,0 +1,24 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Rides sum</th>
+      <th>Avg. ride</th>
+      <th>Avg. fare</th>
+      <th>Taxis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rows.each do |r| %>
+      <tr>
+        <td><%= r[0] %></td>
+        <td><%= "#{r[1]}km" %></td>
+        <td><%= "#{r[2]}km" %></td>
+        <td><%= "#{r[3]} EUR" %></td>
+        <td><%= r[4] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @pagination %>
