@@ -14,7 +14,7 @@ RSpec.describe TaxiRide do
         )
 
         expect(tr.valid?).to be true
-        expect(tr.distance).to eql 15063
+        expect(tr.distance).to eql 15
       end
     end
 
