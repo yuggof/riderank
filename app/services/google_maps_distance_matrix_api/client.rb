@@ -14,9 +14,10 @@ module GoogleMapsDistanceMatrixAPI
 
       r = Net::HTTP.get_response(u)
       h = JSON.parse(r.body)
-      e = h['rows'][0]['elements'][0]
 
-      e['distance']['value'] if e['status'] == 'OK'
+      if h['status'] == 'OK' && h['rows'][0]['elements'][0]['status'] == 'OK'
+        h['rows'][0]['elements'][0]['distance']['value']
+      end
     end
   end
 end
