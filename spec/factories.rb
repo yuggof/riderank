@@ -4,6 +4,7 @@ FactoryGirl.define do
   end
 
   factory :taxi_ride do
+    user { create(:user) }
     sequence(:start_address) { |n| "Słomińskiego #{n}, Warszawa, Polska"  }
     sequence(:destination_address) { |n| "Wiatraczna #{n}, Warszawa, Polska" }
     fare { "#{1 + rand(100)}.#{rand(100)}" }

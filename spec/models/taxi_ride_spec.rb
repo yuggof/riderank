@@ -8,8 +8,9 @@ RSpec.describe TaxiRide do
   describe 'validation' do
     context 'when distance between start address and destination address can be calculated' do
       it 'sets distance' do
+        u = FactoryGirl.create(:user)
         tr = TaxiRide.new(
-          start_address: 'a', destination_address: 'b',
+          user: u, start_address: 'a', destination_address: 'b',
           fare: 1, taxi_provider: FactoryGirl.create(:taxi_provider)
         )
 

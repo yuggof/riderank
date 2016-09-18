@@ -5,12 +5,12 @@ class TaxiRidesController < ApplicationController
   end
 
   def new
-    @taxi_ride = TaxiRide.new
+    @taxi_ride = current_user.taxi_rides.new
     @taxi_providers = TaxiProvider.all
   end
 
   def create
-    @taxi_ride = TaxiRide.new(create_params)
+    @taxi_ride = current_user.taxi_rides.new(create_params)
 
     if @taxi_ride.save
       redirect_to action: :index

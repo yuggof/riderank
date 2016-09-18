@@ -1,6 +1,9 @@
 class TaxiRide < ApplicationRecord
+  belongs_to :user
   belongs_to :taxi_provider
 
+  validates :user_id, presence: true
+  validates :user, presence: true
   validates :start_address, presence: true
   validates :destination_address, presence: true
   validates :fare, presence: true, numericality: {
