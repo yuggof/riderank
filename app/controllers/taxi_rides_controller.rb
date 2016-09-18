@@ -10,7 +10,7 @@ class TaxiRidesController < ApplicationController
   end
 
   def create
-    @taxi_ride = TaxiRide.new(create_params.merge(distance: 1)) # FIXME
+    @taxi_ride = TaxiRide.new(create_params)
 
     if @taxi_ride.save
       redirect_to action: :index
