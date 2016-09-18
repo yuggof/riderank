@@ -8,7 +8,19 @@ class TaxiRide < ApplicationRecord
   }
   validates :taxi_provider_id, presence: true
   validates :taxi_provider, presence: true
-  validates :distance, presence: true, numericality: {
-    only_integer: true, greater_than: 0
-  }
+  validate :distance_can_be_calculated
+
+  private
+
+  def distance_can_be_calculated
+    self.distance = GoogleMapsDistanceMatrixAPI.client.distance_between(
+      start_address,
+      destination_address
+    )
+
+    unless distance
+      errors[:start_address] << 'cannot calculate distance with provided address'
+      errors[:destination_address] << 'cannot calculate distance with provided address'
+    end
+  end
 end
