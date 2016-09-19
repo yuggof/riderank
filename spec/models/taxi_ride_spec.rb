@@ -38,13 +38,22 @@ RSpec.describe TaxiRide do
 
   describe '.from_current_month' do
     it 'returns taxi rides from current month' do
-      GoogleMapsDistanceMatrixAPI.client.distance_between_return_value = 15
+      t = Time.new(2016, 9, 19)
 
-      n = Time.zone.now
-      FactoryGirl.create(:taxi_ride, created_at: n)
-      FactoryGirl.create(:taxi_ride, created_at: n + 1.month)
+      Timecop.freeze t do
+        GoogleMapsDistanceMatrixAPI.client.distance_between_return_value = 15
 
-      expect(TaxiRide.from_current_month.count).to eql 1
+        trs = [
+          FactoryGirl.create(:taxi_ride, created_at: t),
+          FactoryGirl.create(:taxi_ride, created_at: t + 1.day),
+          FactoryGirl.create(:taxi_ride, created_at: t + 1.week)
+        ]
+
+        FactoryGirl.create(:taxi_ride, created_at: t + 1.month)
+        FactoryGirl.create(:taxi_ride, created_at: t + 2.months)
+
+        expect(TaxiRide.from_current_month.map(&:id)).to eql trs.map(&:id)
+      end
     end
   end
 end
