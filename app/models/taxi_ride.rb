@@ -13,6 +13,11 @@ class TaxiRide < ApplicationRecord
   validates :taxi_provider, presence: true
   validate :distance_can_be_calculated
 
+  scope :from_current_month, -> do
+    n = Time.zone.now
+    where(created_at: n.beginning_of_month..n.end_of_month)
+  end
+
   private
 
   def distance_can_be_calculated
