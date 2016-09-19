@@ -13,12 +13,6 @@ class TaxiRide < ApplicationRecord
   validates :taxi_provider, presence: true
   validate :distance_can_be_calculated
 
-  scope :grouped_by_day, -> (page) do
-    ds = TaxiRide.order('DATE(created_at) DESC').page(page).per(5).pluck('DISTINCT(DATE(created_at))')
-
-    where('DATE(created_at) IN (?)', ds)
-  end
-
   private
 
   def distance_can_be_calculated

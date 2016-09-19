@@ -35,18 +35,4 @@ RSpec.describe TaxiRide do
       end
     end
   end
-
-  describe '.grouped_by_day' do
-    it 'returns scope with grouped taxi rides' do
-      GoogleMapsDistanceMatrixAPI.client.distance_between_return_value = 1
-
-      n = Time.zone.now
-
-      10.times { |i| FactoryGirl.create(:taxi_ride, created_at: n - i.day) }
-      FactoryGirl.create_list(:taxi_ride, 3, created_at: n - 1.day)
-
-      expect(TaxiRide.grouped_by_day(1).count).to eql 8
-      expect(TaxiRide.grouped_by_day(2).count).to eql 5
-    end
-  end
 end
