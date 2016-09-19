@@ -35,4 +35,16 @@ RSpec.describe TaxiRide do
       end
     end
   end
+
+  describe '.from_current_month' do
+    it 'returns taxi rides from current month' do
+      GoogleMapsDistanceMatrixAPI.client.distance_between_return_value = 15
+
+      n = Time.zone.now
+      FactoryGirl.create(:taxi_ride, created_at: n)
+      FactoryGirl.create(:taxi_ride, created_at: n + 1.month)
+
+      expect(TaxiRide.from_current_month.count).to eql 1
+    end
+  end
 end
