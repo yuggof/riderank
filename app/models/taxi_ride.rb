@@ -21,16 +21,18 @@ class TaxiRide < ApplicationRecord
   private
 
   def distance_can_be_calculated
-    d = GoogleMapsDistanceMatrixAPI.client.distance_between(
-      start_address,
-      destination_address
-    )
+    unless distance
+      d = GoogleMapsDistanceMatrixAPI.client.distance_between(
+        start_address,
+        destination_address
+      )
 
-    if d
-      self.distance = (d / 1000.0).round
-    else
-      errors[:start_address] << 'cannot calculate distance with provided address'
-      errors[:destination_address] << 'cannot calculate distance with provided address'
+      if d
+        self.distance = (d / 1000.0).round
+      else
+        errors[:start_address] << 'cannot calculate distance with provided address'
+        errors[:destination_address] << 'cannot calculate distance with provided address'
+      end
     end
   end
 end
