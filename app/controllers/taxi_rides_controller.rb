@@ -4,12 +4,6 @@ class TaxiRidesController < ApplicationController
   def index
     trs = TaxiRide.from_current_month
     @taxi_rides_statistics_presenter = TaxiRidesStatisticsPresenter.new(trs)
-
-    @pagination = current_user.taxi_rides
-      .group('DATE(created_at)')
-      .page(params[:page]).per(10)
-
-    @rows = @pagination.pluck('DATE(created_at)', 'SUM(distance)', 'AVG(distance)', 'AVG(fare)')
   end
 
   def new
