@@ -9,6 +9,6 @@ class TaxiRidesStatisticsPresenter
     @taxi_rides
       .select { |tr| (n.beginning_of_week..n.end_of_week).cover?(tr.created_at) }
       .map(&:distance)
-      .reduce(:+)
+      .reduce(0, :+)
   end
 end
