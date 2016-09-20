@@ -7,7 +7,6 @@
   <strong><%= "#{number_with_precision(@taxi_rides_statistics_presenter.money_spent_during_current_week, precision: 2)} EUR" %></strong>
 </h3>
 
-
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
@@ -19,16 +18,14 @@
     </tr>
   </thead>
   <tbody>
-    <% @rows.each do |r| %>
+    <% @taxi_rides_statistics_presenter.table_rows.each do |r| %>
       <tr>
         <td><%= r[0] %></td>
         <td><%= "#{r[1]}km" %></td>
         <td><%= "#{r[2]}km" %></td>
-        <td><%= "#{r[3]} EUR" %></td>
-        <td><%= r[4] %></td>
+        <td><%= "#{number_with_precision(r[3], precision: 2)} EUR" %></td>
+        <td><%= r[4].join(', ') %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= paginate @pagination %>
