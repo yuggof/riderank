@@ -20,4 +20,21 @@ class TaxiRidesStatisticsPresenter
       .map(&:fare)
       .reduce(0, :+)
   end
+
+  def table_rows
+    @taxi_rides
+      .group_by { |tr| tr.created_at.strftime('%Y-%m-%d') }
+      .sort
+      .map do |d, trs|
+        ds = trs.map(&:distance).reduce(:+)
+
+        [
+          d,
+          ds,
+          ds.to_f / trs.size,
+          trs.map(&:fare).reduce(:+).to_f / trs.size,
+          trs.map { |tr| tr.taxi_provider.name }.uniq
+        ]
+      end
+  end
 end
