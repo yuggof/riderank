@@ -2,6 +2,9 @@ class TaxiRidesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    trs = TaxiRide.from_current_month
+    @taxi_rides_statistics_presenter = TaxiRidesStatisticsPresenter.new(trs)
+
     @pagination = current_user.taxi_rides
       .group('DATE(created_at)')
       .page(params[:page]).per(10)

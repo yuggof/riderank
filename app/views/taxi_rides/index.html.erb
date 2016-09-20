@@ -1,3 +1,13 @@
+<h3>
+  Kilometers rode during current week:
+  <strong><%= @taxi_rides_statistics_presenter.kilometers_rode_during_current_week %></strong>
+</h3>
+<h3>
+  Money spent during current week:
+  <strong><%= "#{number_with_precision(@taxi_rides_statistics_presenter.money_spent_during_current_week, precision: 2)} EUR" %></strong>
+</h3>
+
+
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
